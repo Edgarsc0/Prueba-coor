@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="c1" placeholder="latitud">
+    <input type="number" id="c2" placeholder="longitud">
+    <input type="number" id="c3" placeholder="altura">
+    <button onclick="test()">Calcular</button>
+    <script>
+        function test() {
+            navigator.geolocation.getCurrentPosition(test2);
+        } 
+        function test2(position){
+            document.getElementById("c1").value=position.coords.latitude;
+            document.getElementById("c2").value=position.coords.longitude;
+            if(position.coords.altitude==null){
+                alert("No se logro obtener la altura");
+            }else{
+                document.getElementById("c3").value=position.coords.altitude;
+            }
+        }  
+    </script>
+</body>
+</html>
