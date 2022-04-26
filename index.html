@@ -9,16 +9,17 @@
 <body>
     <table>
         <tr>
-            <td><label>Latitud: </label></td><td><input readonly="" type="number" id="c1" placeholder="latitud"></td>
+            <td><label>Latitud: </label></td><td><input readonly="" type="text" id="c1" placeholder="latitud"></td>
         </tr>
         <tr>
-            <td><label>Longitud: </label></td><td><input readonly="" type="number" id="c2" placeholder="longitud"></td>
+            <td><label>Longitud: </label></td><td><input readonly="" type="text" id="c2" placeholder="longitud"></td>
         </tr>
         <tr>
-            <td><label>Altitud: </label></td><td><input readonly="" type="number" id="c3" placeholder="altura"></td>
+            <td><label>Altitud: </label></td><td><input readonly="" type="text" id="c3" placeholder="altura"></td>
         </tr>
     </table>
-    <button onclick="test()">Calcular</button>
+    <input type="text" id="wp" readonly="">
+    <button onclick="test(),getLocation()">Calcular</button>
     <script>
         function test() {
             navigator.geolocation.getCurrentPosition(test2);
@@ -31,6 +32,16 @@
             }else{
                 document.getElementById("c3").value=position.coords.altitude;
             }
+        }
+        function getLocation(){
+            if(navigator.geolocation){
+            navigator.geolocation.watchPosition(showPosition);
+            }else{
+            }
+        }
+        function showPosition(position){
+            document.getElementById("wp").value="Latitud: " + position.coords.latitude + 
+            "Longitud: " + position.coords.longitude;
         }  
     </script>
 </body>
