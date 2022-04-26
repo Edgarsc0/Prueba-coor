@@ -7,9 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="number" id="c1" placeholder="latitud">
-    <input type="number" id="c2" placeholder="longitud">
-    <input type="number" id="c3" placeholder="altura">
+    <table>
+        <tr>
+            <td><label>Latitud: </label></td><td><input readonly="" type="number" id="c1" placeholder="latitud"></td>
+        </tr>
+        <tr>
+            <td><label>Longitud: </label></td><td><input readonly="" type="number" id="c2" placeholder="longitud"></td>
+        </tr>
+        <tr>
+            <td><label>Altitud: </label></td><td><input readonly="" type="number" id="c3" placeholder="altura"></td>
+        </tr>
+    </table>
     <button onclick="test()">Calcular</button>
     <script>
         function test() {
