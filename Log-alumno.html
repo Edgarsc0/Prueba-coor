@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        *{
+            background-color: #A3DBDF;
+            margin: 0;
+        }
+        .encabezado{
+            width:100%;
+            height: 82px;
+            background-color: #003147;
+            margin-top: 31px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            display: grid;
+            place-items: center;
+        }
+        h1{
+            font-family: monospace;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 48px;
+            line-height: 48px;
+            text-align: center;
+            background-color: #003147;
+            color: #FFFFFF;
+        }
+        .flecha{
+            margin-top: 35px;
+            display: grid;
+            place-items: center;
+        }
+        .atras{
+            background-image: url("fl5.png");
+            background-repeat:no-repeat;
+            background-position:center;
+            border: 0;
+            height: 100px;
+            width: 155px;
+            color:white;
+            font-weight: bold;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .mainForm{
+            margin-top: 25px;
+            /*border: 1px solid white;*/
+            display: grid;
+            place-items: center;
+            margin-left: 50px;
+            margin-right: 50px;
+            background-color:#005074;
+            text-align: center;
+        }
+        .enc{
+            /*border: 1px solid white;*/
+            width: 80%;
+            height: 50px;
+            /*text-align: center;*/
+            background-color: #007FB8;
+            margin-top: 50px;
+        }
+        p{
+            font-family: monospace;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 48px;
+            text-align: center;
+            background-color: #007FB8;
+            color:black;
+        }
+        input{
+            margin-top: 10px;
+            /*background-color: white;*/
+            width: 80%;
+            height: 40px;
+            border: 0;
+            text-align: center;
+            font-size:25px;
+            background-color:white;
+            margin-top: 50px;
+        }
+        .enviar{
+            background-color: #BAE7FB;
+            font-size: 25px;
+            font-weight: bold;
+            width: 30%;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="encabezado">
+        <h1>ALUMNO</h1>
+    </div>
+    <div class="flecha">
+        <a href="index.html"><button class="atras">ATRAS</button></a>
+    </div>
+    <form>
+        <div class="mainForm">
+            <div class="enc">
+                <p>BOLETA</p>
+            </div>
+            <input type="number" placeholder="BOLETA-ALUMNO">
+            <div class="enc">
+                <p>CONTRASEÑA</p>
+            </div>
+            <input type="password" placeholder="CONTRASEÑA">
+            <input class="enviar" type="submit" value="ENVIAR">
+        </div>
+    </form>
+</body>
+</html>
