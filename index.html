@@ -21,11 +21,41 @@
     <input type="button" value="Obtener diferencia" onclick="Prueba()">
     <input type="text" id="dif" readonly="readonly" placeholder="diferencia" style="width: 500px;">
     <input type="text" id="diflong" readonly="readonly" placeholder="diferencia" style="width: 500px;">
-
+    <br>
+    <br>
+    <hr>
+    <p>Sistema de Calculo de Distancias entre dos puntos</p>
+    <label>Latitud 1: </label><input type="number" id="lat1" placeholder="latitud-1"><label> Longitud 1: </label><input type="number" id="long1" placeholder="longitud-1">
+    <br>
+    <br>
+    <label>Latitud 2: </label><input type="number" id="lat2" placeholder="latitud-2"><label> Longitud 2: </label><input type="number" id="long2" placeholder="longitud-2">
+    <br>
+    <br>
+    <button onclick="calcularDistancia()">Calcular distancia</button>
+    <label>La distancia entre esos dos puntos es de: </label><input readonly="" id="distancia" placeholder="Esperando datos">
+    <br>
+    <br>
+    <hr>
+    <p>Sistema de Calculo de Altura</p>
+    <latitud>Altura: </latitud><input type="number" id="alt" readonly="" placeholder="Da click en el boton -->">
+    <button onclick="test()">Calcular Altura</button>
 </head>
 <body>
-
     <script>
+        function test(){
+            navigator.geolocation.getCurrentPosition(test2);
+        }
+        function test2(position){
+            if(position.coords.altitude==null){
+                alert("No se logro obtener la altura");
+            }else{
+                document.getElementById("alt").value=position.coords.altitude;
+        }}
+        function calcularDistancia(){
+            var difLat=document.getElementById("lat1").value-document.getElementById("lat2").value;
+            var difLon=document.getElementById("long1").value-document.getElementById("long2").value;
+            document.getElementById("distancia").value=(10**5)*(difLat**2 + difLon**2)**0.5+"m";
+        }
         function obtenerC1(){
             if(!navigator.geolocation){
                 alert("Tu navegador no soporta la geolocalizacion");
