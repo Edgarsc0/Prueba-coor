@@ -1,87 +1,79 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prueba coordenadas</title>
+    <p>Sistema de Obtencion de Coordenadas</p>
+
+    <input type="button" value="Obtener Coordenadas 1" onclick="obtenerC1()">
+    <input type="text" id="cor1-lat" readonly="readonly" placeholder="latitud" style="width: 500px;">
+    <input type="text" id="cor1-lon" readonly="readonly" placeholder="longitud" style="width: 500px;">
+    <br>
+    <br>
+    <input type="button" value="Obtener Coordenadas 2" onclick="obtenerC2()">
+    <input type="text" id="cor2-lat" readonly="readonly" placeholder="latitud" style="width: 500px;">
+    <input type="text" id="cor2-lon" readonly="readonly" placeholder="longitud" style="width: 500px;">
+    <br>
+    <br>
+    <input type="button" value="Obtener diferencia" onclick="Prueba()">
+    <input type="text" id="dif" readonly="readonly" placeholder="diferencia" style="width: 500px;">
+    <input type="text" id="diflong" readonly="readonly" placeholder="diferencia" style="width: 500px;">
+
 </head>
 <body>
-    <table style="text-align: center;">
-        <tr>
-            <td colspan="2">PRIMERAS COORDENADAS</td>
-        </tr>
-        <tr>
-            <td><label>Latitud: </label></td><td><input readonly="" type="text" id="c1" placeholder="latitud"></td>
-        </tr>
-        <tr>
-            <td><label>Longitud: </label></td><td><input readonly="" type="text" id="c2" placeholder="longitud"></td>
-        </tr>
-        <tr>
-            <td><label>Altitud: </label></td><td><input readonly="" type="text" id="c3" placeholder="altura"></td>
-        </tr>
-        <tr><td colspan="2">
-            <button onclick="test()">Calcular</button>
-        </td></tr>
-        <tr>
-            <td colspan="2">SEGUNDAS COORDENADAS</td>
-        </tr>
-        <tr>
-            <td><label>Latitud: </label></td><td><input readonly="" type="text" id="c1-2" placeholder="latitud"></td>
-        </tr>
-        <tr>
-            <td><label>Longitud: </label></td><td><input readonly="" type="text" id="c2-2" placeholder="longitud"></td>
-        </tr>
-        <tr>
-            <td><label>Altitud: </label></td><td><input readonly="" type="text" id="c3-2" placeholder="altura"></td>
-        </tr>
-        <tr>
-        <td colspan="2">
-            <button onclick="test4()">Calcular</button>
-        </td></tr>
-    </table>
-    <!--<a href="Log-alumno.html">LOG-ALUMNO</a>
-    <input type="text" id="wp" readonly="">-->
-    <input readonly="" id="desp" type="text">
+
     <script>
-        function test() {
-            navigator.geolocation.getCurrentPosition(test2);
-        } 
-        function test4() {
-            navigator.geolocation.getCurrentPosition(test3);
-        } 
-        function test2(position){
-            document.getElementById("c1").value=position.coords.latitude;
-            document.getElementById("c2").value=position.coords.longitude;
-            if(position.coords.altitude==null){
-                alert("No se logro obtener la altura");
+        function obtenerC1(){
+            if(!navigator.geolocation){
+                alert("Tu navegador no soporta la geolocalizacion");
             }else{
-                document.getElementById("c3").value=position.coords.altitude;
+                navigator.geolocation.getCurrentPosition(onSucces,onError);
+                function onSucces(position){
+                    const {
+                        latitude,
+                        longitude
+                    }=position.coords;
+                    /*document.getElementById('cor1-lat').value=`${latitude}`//`Your location: (${latitude},${longitude})`
+                    document.getElementById('cor1-lon').value=`${longitude}`//`Your location: (${latitude},${longitude})`*/
+                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toPrecision(50);
+                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toPrecision(50);
+                }
+                function onError(){
+                    document.getElementById('cor1').value='No se obtuvieron las coordenadas';
+                }
             }
         }
-        function test3(position){
-            document.getElementById("c1-2").value=position.coords.latitude;
-            document.getElementById("c2-2").value=position.coords.longitude;
-            if(position.coords.altitude==null){
-                alert("No se logro obtener la altura");
+        function obtenerC2(){
+            if(!navigator.geolocation){
+                alert("Tu navegador no soporta la geolocalizacion");
             }else{
-                document.getElementById("c3-2").value=position.coords.altitude;
+                navigator.geolocation.getCurrentPosition(onSucces2,onError2);
+                function onSucces2(position){
+                    const {
+                        latitude,
+                        longitude
+                    }=position.coords;
+                    document.getElementById('cor2-lat').value=(parseFloat(`${latitude}`)).toPrecision(50)//`Your location: (${latitude},${longitude})`
+                    document.getElementById('cor2-lon').value=(parseFloat(`${longitude}`)).toPrecision(50)//`Your location: (${latitude},${longitude})`
+                }
+                function onError2(){
+                    document.getElementById('cor2').value='No se obtuvieron las coordenadas';
+                }
             }
-            calcularDesplazamiento();
         }
-        function calcularDesplazamiento(){
-            document.getElementById("desp").value=10**5 * ((document.getElementById("c1").value-document.getElementById("c1-2").value)**2 +(document.getElementById("c2").value-document.getElementById("c2-2").value)**2)**0.5+"m";
+        function Prueba(){
+            var difLat=(parseFloat(document.getElementById('cor2-lat').value))-(parseFloat(document.getElementById('cor1-lat').value));
+            var difLon=(parseFloat(document.getElementById('cor2-lon').value))-(parseFloat(document.getElementById('cor1-lon').value));
+            document.getElementById('dif').value=difLat;
+            document.getElementById('diflong').value=difLon;
+            alert("Has recorrido: "+ (10**5 * (difLat**2 + difLon**2)**0.5)+"m");
+            //alert((parseFloat(document.getElementById('cor1-lat').value).toFixed(20)));
         }
-        /*function getLocation(){
-            if(navigator.geolocation){
-            navigator.geolocation.watchPosition(showPosition);
-            }else{
-            }
-        }
-        function showPosition(position){
-            document.getElementById("wp").value="Latitud: " + position.coords.latitude + 
-            "Longitud: " + position.coords.longitude;
-        }*/  
+
     </script>
+
 </body>
 </html>
