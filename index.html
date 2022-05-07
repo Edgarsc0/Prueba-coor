@@ -69,8 +69,8 @@
                     }=position.coords;
                     /*document.getElementById('cor1-lat').value=`${latitude}`//`Your location: (${latitude},${longitude})`
                     document.getElementById('cor1-lon').value=`${longitude}`//`Your location: (${latitude},${longitude})`*/
-                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`));
-                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`));
+                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toFixed(10);
+                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toFixed(10);
                 }
                 function onError(){
                     document.getElementById('cor1').value='No se obtuvieron las coordenadas';
@@ -87,8 +87,8 @@
                         latitude,
                         longitude
                     }=position.coords;
-                    document.getElementById('cor2-lat').value=(parseFloat(`${latitude}`))//`Your location: (${latitude},${longitude})`
-                    document.getElementById('cor2-lon').value=(parseFloat(`${longitude}`))//`Your location: (${latitude},${longitude})`
+                    document.getElementById('cor2-lat').value=(parseFloat(`${latitude}`)).toFixed(10);//`Your location: (${latitude},${longitude})`
+                    document.getElementById('cor2-lon').value=(parseFloat(`${longitude}`)).toFixed(10);//`Your location: (${latitude},${longitude})`
                 }
                 function onError2(){
                     document.getElementById('cor2').value='No se obtuvieron las coordenadas';
