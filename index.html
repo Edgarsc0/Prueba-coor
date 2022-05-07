@@ -43,14 +43,15 @@
 <body>
     <script>
         function test(){
-            navigator.geolocation.getCurrentPosition(test2);
+                navigator.geolocation.getCurrentPosition(test2);
+            }
+            function test2(position){
+                if(position.coords.altitude==null){
+                    alert("No se logro obtener la altura");
+                }else{
+                    document.getElementById("alt").value=position.coords.altitude;
+            }
         }
-        function test2(position){
-            if(position.coords.altitude==null){
-                alert("No se logro obtener la altura");
-            }else{
-                document.getElementById("alt").value=position.coords.altitude;
-        }}
         function calcularDistancia(){
             var difLat=document.getElementById("lat1").value-document.getElementById("lat2").value;
             var difLon=document.getElementById("long1").value-document.getElementById("long2").value;
@@ -68,8 +69,8 @@
                     }=position.coords;
                     /*document.getElementById('cor1-lat').value=`${latitude}`//`Your location: (${latitude},${longitude})`
                     document.getElementById('cor1-lon').value=`${longitude}`//`Your location: (${latitude},${longitude})`*/
-                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toPrecision(50);
-                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toPrecision(50);
+                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`));
+                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`));
                 }
                 function onError(){
                     document.getElementById('cor1').value='No se obtuvieron las coordenadas';
@@ -86,8 +87,8 @@
                         latitude,
                         longitude
                     }=position.coords;
-                    document.getElementById('cor2-lat').value=(parseFloat(`${latitude}`)).toPrecision(50)//`Your location: (${latitude},${longitude})`
-                    document.getElementById('cor2-lon').value=(parseFloat(`${longitude}`)).toPrecision(50)//`Your location: (${latitude},${longitude})`
+                    document.getElementById('cor2-lat').value=(parseFloat(`${latitude}`))//`Your location: (${latitude},${longitude})`
+                    document.getElementById('cor2-lon').value=(parseFloat(`${longitude}`))//`Your location: (${latitude},${longitude})`
                 }
                 function onError2(){
                     document.getElementById('cor2').value='No se obtuvieron las coordenadas';
