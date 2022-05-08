@@ -39,9 +39,31 @@
     <p>Sistema de Calculo de Altura</p>
     <latitud>Altura: </latitud><input type="number" id="alt" readonly="" placeholder="Da click en el boton -->">
     <button onclick="test()">Calcular Altura</button>
+    <br>
+    <br>
+    <button onclick="getLocation()">Iniciar WatchPosition()</button>
+    <br>
+    <br>
+    <label>WatchPosition(): </label>
+    
+    <!--<input type="text" id="wp" readonly="">-->
+    <div id="div"></div>
 </head>
 <body>
     <script>
+        function getLocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.watchPosition(showPosition);
+            }else{
+            }
+        }
+        function showPosition(position){
+            var tabla=document.createElement("TABLE");
+            tabla.setAttribute("border","1");
+            var fila_col="<tr><td>"+position.coords.latitude.toFixed(13)+"</td><td>"+position.coords.longitude.toFixed(13)+"</td></tr>";
+            tabla.innerHTML=fila_col;
+            document.getElementById("div").appendChild(tabla);
+        }  
         function test(){
                 navigator.geolocation.getCurrentPosition(test2);
             }
