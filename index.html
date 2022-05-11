@@ -70,8 +70,7 @@
                 copiar.setAttribute("onclick","copiarCoordenadas()")
                 document.getElementById("div").appendChild(button);
                 document.getElementById("div").appendChild(copiar);
-            }else{
-            }
+            }else{}
         }
         function detenerWp(){
             try{
@@ -90,8 +89,18 @@
             var tabla=document.createElement("TABLE");
             tabla.setAttribute("id","tb");
             //tabla.setAttribute("border","1");
-            var fila_col="<tr><td>"+i+": </td><td><input type='text' style='border:0;' id='longitud-"+i+"' readonly='' value='("+position.coords.longitude.toFixed(13)+",'></td><td><input type='text' style='border:0;' readonly='' id='latitud-"+i+"' value='"+position.coords.latitude.toFixed(13)+")'></td></tr>";
-            tabla.innerHTML=fila_col;
+            var piso;
+            var fila_col="<tr><td>"+i+": </td><td><input type='text' style='border:0;' id='longitud-"+i+"' readonly='' value='("+position.coords.longitude.toFixed(13)+",'></td><td><input type='text' style='border:0;' readonly='' id='latitud-"+i+"' value='"+position.coords.latitude.toFixed(13)+")'></td><td><input type='text' readonly='' id='altura-"+i+"' value='"+position.coords.altitude+"'>";
+            if(position.coords.altitude<2243.29){
+                piso="<td>Estas en planta baja</td></tr>";
+            }if(position.coords.altitude>=2243.29 && position.coords.altitude<2246.19){
+                piso="<td>Estas en el primer piso</td></tr>;"
+            }if(position.coords.altitude>=2246.19 && position.coords.altitude<2249.19){
+                piso="<td>Estas en el segundo piso</td></tr>";
+            }if(position.coords.altitude>=2249.19){
+                piso="<td>Estas en el tercer piso</td></tr>";
+            }
+            tabla.innerHTML=fila_col+piso;
             document.getElementById("div").appendChild(tabla);
             i++;
         }
