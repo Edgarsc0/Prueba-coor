@@ -101,8 +101,8 @@
             for(i=0;i<document.querySelectorAll("#tb").length;i++){
                 coordenadas+=document.getElementById("longitud-"+(i+1)).value+document.getElementById("latitud-"+(i+1)).value;
             }
-            navigator.clipboard.writeText(coordenadas);
-            alert("Se copiaron las coordenadas")
+            try{navigator.clipboard.writeText(coordenadas);
+            alert("Se copiaron las coordenadas")}catch(error){alert("No se pudieron copiar las coordenadas")}
         }  
         function test(){
             navigator.geolocation.getCurrentPosition(test2);
