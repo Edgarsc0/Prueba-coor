@@ -104,9 +104,16 @@
             var textArea=document.createElement("TEXTAREA");
             textArea.setAttribute("id","ta");
             textArea.innerHTML=coordenadas;
-            textArea.select();
-            document.execCommand('copy');
-            //document.getElementById("div").appendChild(textArea);
+            //textArea.setAttribute("style","visibility:hidden;");
+            document.getElementById("div").appendChild(textArea);
+            try{
+                textArea.focus();
+                document.execCommand("selectAll");
+                document.execCommand("copy")
+                alert("Copiado!");
+            }catch(error){
+                alert("No se pudo obtener las coordenadas");
+            }
         }  
         function test(){
             navigator.geolocation.getCurrentPosition(test2);
