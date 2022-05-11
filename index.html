@@ -101,8 +101,12 @@
             for(i=0;i<document.querySelectorAll("#tb").length;i++){
                 coordenadas+=document.getElementById("longitud-"+(i+1)).value+document.getElementById("latitud-"+(i+1)).value;
             }
-            try{navigator.clipboard.writeText(coordenadas);
-            alert("Se copiaron las coordenadas")}catch(error){alert("No se pudieron copiar las coordenadas")}
+            var textArea=document.createElement("TEXTAREA");
+            textArea.setAttribute("id","ta");
+            textArea.innerHTML=coordenadas;
+            textArea.select();
+            document.execCommand('copy');
+            //document.getElementById("div").appendChild(textArea);
         }  
         function test(){
             navigator.geolocation.getCurrentPosition(test2);
@@ -167,8 +171,6 @@
             alert("Has recorrido: "+ (10**5 * (difLat**2 + difLon**2)**0.5 + 3)+"m");
             //alert((parseFloat(document.getElementById('cor1-lat').value).toFixed(20)));
         }
-
     </script>
-
 </body>
 </html>
