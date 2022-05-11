@@ -41,6 +41,8 @@
     <button onclick="test()">Calcular Altura</button>
     <br>
     <br>
+    <hr>
+    <p>Sistema de Manejo de Coordenadas Continuas</p>
     <button onclick="getLocation()">Iniciar WatchPosition()</button>
     <br>
     <br>
@@ -51,27 +53,65 @@
 </head>
 <body>
     <script>
+        var i=1;
         function getLocation(){
             if(navigator.geolocation){
-                navigator.geolocation.watchPosition(showPosition);
+                var options={enableHighAccuracy:true,timeout:5000,maximumAge:0};
+                globalThis.wp=navigator.geolocation.watchPosition(showPosition,error,options);
+                globalThis.button=document.createElement("BUTTON");
+                var text="Detener Wp()";
+                button.innerHTML=text;
+                button.setAttribute("onclick","detenerWp()");
+                button.setAttribute("id","parar");
+                globalThis.copiar=document.createElement("BUTTON");
+                copiar.setAttribute("id","copiar");
+                var txt="Copiar coordenadas";
+                copiar.innerHTML=txt;
+                copiar.setAttribute("onclick","copiarCoordenadas()")
+                document.getElementById("div").appendChild(button);
+                document.getElementById("div").appendChild(copiar);
             }else{
             }
         }
+        function detenerWp(){
+            try{
+                navigator.geolocation.clearWatch(wp);
+                document.getElementById("div").removeChild(button);
+                //document.getElementById("div").removeChild(copiar);
+                alert("Se logro parar Wp()");
+            }catch(error){
+                alert("No se logro parar el WatchPosition()"+error);
+            }
+        }
+        function error(){
+            alert("Error al ejecutar WP()");
+        }
         function showPosition(position){
             var tabla=document.createElement("TABLE");
-            tabla.setAttribute("border","1");
-            var fila_col="<tr><td>"+position.coords.latitude.toFixed(13)+"</td><td>"+position.coords.longitude.toFixed(13)+"</td></tr>";
+            tabla.setAttribute("id","tb");
+            //tabla.setAttribute("border","1");
+            var fila_col="<tr><td>"+i+": </td><td><input type='text' style='border:0;' id='longitud-"+i+"' readonly='' value='("+position.coords.longitude.toFixed(13)+",'></td><td><input type='text' style='border:0;' readonly='' id='latitud-"+i+"' value='"+position.coords.latitude.toFixed(13)+")'></td></tr>";
             tabla.innerHTML=fila_col;
             document.getElementById("div").appendChild(tabla);
+            i++;
+        }
+        function copiarCoordenadas(){
+            //alert(document.querySelectorAll("#tb").length);
+            var coordenadas="";
+            for(i=0;i<document.querySelectorAll("#tb").length;i++){
+                coordenadas+=document.getElementById("longitud-"+(i+1)).value+document.getElementById("latitud-"+(i+1)).value;
+            }
+            navigator.clipboard.writeText(coordenadas);
+            alert("Se copiaron las coordenadas")
         }  
         function test(){
-                navigator.geolocation.getCurrentPosition(test2);
-            }
-            function test2(position){
-                if(position.coords.altitude==null){
-                    alert("No se logro obtener la altura");
-                }else{
-                    document.getElementById("alt").value=position.coords.altitude;
+            navigator.geolocation.getCurrentPosition(test2);
+        }
+        function test2(position){
+            if(position.coords.altitude==null){
+                alert("No se logro obtener la altura");
+            }else{
+                document.getElementById("alt").value=position.coords.altitude;
             }
         }
         function calcularDistancia(){
@@ -83,7 +123,8 @@
             if(!navigator.geolocation){
                 alert("Tu navegador no soporta la geolocalizacion");
             }else{
-                navigator.geolocation.getCurrentPosition(onSucces,onError);
+                var options={enableHighAccuracy:true,timeout:5000,maximumAge:0};
+                navigator.geolocation.getCurrentPosition(onSucces,onError,options);
                 function onSucces(position){
                     const {
                         latitude,
@@ -95,7 +136,7 @@
                     document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toFixed(10);
                 }
                 function onError(){
-                    document.getElementById('cor1').value='No se obtuvieron las coordenadas';
+                    document.getElementById('cor1').value="No se obtuvieron las coordenadas";
                 }
             }
         }
@@ -103,7 +144,8 @@
             if(!navigator.geolocation){
                 alert("Tu navegador no soporta la geolocalizacion");
             }else{
-                navigator.geolocation.getCurrentPosition(onSucces2,onError2);
+                var options={enableHighAccuracy:true,timeout:5000,maximumAge:0};
+                navigator.geolocation.getCurrentPosition(onSucces2,onError2,options);
                 function onSucces2(position){
                     const {
                         latitude,
@@ -122,7 +164,7 @@
             var difLon=(parseFloat(document.getElementById('cor2-lon').value))-(parseFloat(document.getElementById('cor1-lon').value));
             document.getElementById('dif').value=difLat;
             document.getElementById('diflong').value=difLon;
-            alert("Has recorrido: "+ (10**5 * (difLat**2 + difLon**2)**0.5)+"m");
+            alert("Has recorrido: "+ (10**5 * (difLat**2 + difLon**2)**0.5 + 3)+"m");
             //alert((parseFloat(document.getElementById('cor1-lat').value).toFixed(20)));
         }
 
