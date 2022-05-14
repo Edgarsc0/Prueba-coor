@@ -50,10 +50,15 @@
     
     <!--<input type="text" id="wp" readonly="">-->
     <div id="div"></div>
+    <div id="applet_container" style="width: 120px;height: 90px;"></div>
 </head>
 <body>
+
     <script>
         var i=1;
+        var lat=[];
+        var lon=[];
+        var alt=[];
         function getLocation(){
             if(navigator.geolocation){
                 var options={enableHighAccuracy:true,timeout:5000,maximumAge:0};
@@ -78,6 +83,7 @@
                 document.getElementById("div").removeChild(button);
                 //document.getElementById("div").removeChild(copiar);
                 alert("Se logro parar Wp()");
+                alert(lat+", "+lon+", "+alt);
             }catch(error){
                 alert("No se logro parar el WatchPosition()"+error);
             }
@@ -100,6 +106,9 @@
             }if(position.coords.altitude>=2249.19){
                 piso="<td>Estas en el tercer piso</td></tr>";
             }
+            lat.push(position.coords.latitude.toFixed(13));
+            lon.push(position.coords.longitude.toFixed(13));
+            try{alt.push(position.coords.altitude.toFixed(13))}catch(error){alt.push(position.coords.altitude);}
             tabla.innerHTML=fila_col+piso;
             document.getElementById("div").appendChild(tabla);
             i++;
@@ -136,9 +145,21 @@
             }
         }
         function calcularDistancia(){
-            var difLat=document.getElementById("lat1").value-document.getElementById("lat2").value;
-            var difLon=document.getElementById("long1").value-document.getElementById("long2").value;
-            document.getElementById("distancia").value=(10**5)*(difLat**2 + difLon**2)**0.5+"m";
+            var r=6.371009*10**6;
+            var lat1=parseFloat(document.getElementById("lat1").value);
+            var lat2=parseFloat(document.getElementById("lat2").value);
+            var lon1=parseFloat(document.getElementById("long1").value);
+            var lon2=parseFloat(document.getElementById("long2").value);
+            var v1x=(r*Math.cos(lat1*Math.PI/180)*Math.cos((360+lon1)*Math.PI/180));
+            var v1y=(r*Math.cos(lat1*Math.PI/180)*Math.sin((360+lon1)*Math.PI/180));
+            var v1z=(r*Math.sin(lat1*Math.PI/180));
+            var v2x=(r*Math.cos(lat2*Math.PI/180)*Math.cos((360+lon2)*Math.PI/180));
+            var v2y=(r*Math.cos(lat2*Math.PI/180)*Math.sin((360+lon2)*Math.PI/180));
+            var v2z=(r*Math.sin(lat2*Math.PI/180));
+            var productoPunto=(v1x*v2x+v2y*v1y+v1z*v2z);
+            var acos=180*Math.acos((productoPunto/(r**2)))/Math.PI;
+            var distancia=(Math.PI*r*acos)/180;
+            document.getElementById("distancia").value=distancia+"m";
         }
         function obtenerC1(){
             if(!navigator.geolocation){
@@ -185,7 +206,7 @@
             var difLon=(parseFloat(document.getElementById('cor2-lon').value))-(parseFloat(document.getElementById('cor1-lon').value));
             document.getElementById('dif').value=difLat;
             document.getElementById('diflong').value=difLon;
-            alert("Has recorrido: "+ (10**5 * (difLat**2 + difLon**2)**0.5 + 3)+"m");
+            //alert("Has recorrido: "+ (10**5 * (difLat**2 + difLon**2)**0.5 + 3)+"m");
             //alert((parseFloat(document.getElementById('cor1-lat').value).toFixed(20)));
         }
     </script>
