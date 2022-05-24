@@ -6,14 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba coordenadas</title>
+</head>
+<body>
     <p>Sistema de Obtencion de Coordenadas</p>
-
     <input type="button" value="Obtener Coordenadas 1" onclick="obtenerC1()">
     <input type="text" id="cor1-lat" readonly="readonly" placeholder="latitud" style="width: 500px;">
     <input type="text" id="cor1-lon" readonly="readonly" placeholder="longitud" style="width: 500px;">
     <br>
     <br>
-    <input type="button" value="Obtener Coordenadas 2" onclick="obtenerC2()">
+    <!--<input type="button" value="Obtener Coordenadas 2" onclick="obtenerC2()">
     <input type="text" id="cor2-lat" readonly="readonly" placeholder="latitud" style="width: 500px;">
     <input type="text" id="cor2-lon" readonly="readonly" placeholder="longitud" style="width: 500px;">
     <br>
@@ -22,7 +23,7 @@
     <input type="text" id="dif" readonly="readonly" placeholder="diferencia" style="width: 500px;">
     <input type="text" id="diflong" readonly="readonly" placeholder="diferencia" style="width: 500px;">
     <br>
-    <br>
+    <br>-->
     <hr>
     <p>Sistema de Calculo de Distancias entre dos puntos</p>
     <label>Latitud 1: </label><input type="number" id="lat1" placeholder="latitud-1"><label> Longitud 1: </label><input type="number" id="long1" placeholder="longitud-1">
@@ -37,7 +38,7 @@
     <br>
     <hr>
     <p>Sistema de Calculo de Altura</p>
-    <latitud>Altura: </latitud><input type="number" id="alt" readonly="" placeholder="Da click en el boton -->">
+    <label>Altura: </label><input type="number" id="alt" readonly="" placeholder="Da click en el boton -->">
     <button onclick="test()">Calcular Altura</button>
     <br>
     <br>
@@ -50,10 +51,8 @@
     
     <!--<input type="text" id="wp" readonly="">-->
     <div id="div"></div>
-    <div id="applet_container" style="width: 120px;height: 90px;"></div>
-</head>
-<body>
-
+    <!--<canvas id="cv" style="width: 4000px;border:1px solid black;"></canvas>-->
+    <!--<button onclick="dibujarCanva()">DibujarCanva</button>-->
     <script>
         var i=1;
         var lat=[];
@@ -174,8 +173,8 @@
                     }=position.coords;
                     /*document.getElementById('cor1-lat').value=`${latitude}`//`Your location: (${latitude},${longitude})`
                     document.getElementById('cor1-lon').value=`${longitude}`//`Your location: (${latitude},${longitude})`*/
-                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toFixed(10);
-                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toFixed(10);
+                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toFixed(14);
+                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toFixed(14);
                 }
                 function onError(){
                     document.getElementById('cor1').value="No se obtuvieron las coordenadas";
