@@ -15,7 +15,7 @@
     <input type="text" id="cor1-lon" readonly="readonly" placeholder="longitud" style="width: 500px;">
     <br>
     <br>
-    <input type="button" value="Obtener Coordenadas 2" onclick="obtenerC2()">
+    <!--<input type="button" value="Obtener Coordenadas 2" onclick="obtenerC2()">
     <input type="text" id="cor2-lat" readonly="readonly" placeholder="latitud" style="width: 500px;">
     <input type="text" id="cor2-lon" readonly="readonly" placeholder="longitud" style="width: 500px;">
     <br>
@@ -24,7 +24,7 @@
     <input type="text" id="dif" readonly="readonly" placeholder="diferencia" style="width: 500px;">
     <input type="text" id="diflong" readonly="readonly" placeholder="diferencia" style="width: 500px;">
     <br>
-    <br>
+    <br>-->
     <hr>
     <p>Sistema de Calculo de Distancias entre dos puntos</p>
     <label>Latitud 1: </label><input type="number" id="lat1" placeholder="latitud-1"><label> Longitud 1: </label><input type="number" id="long1" placeholder="longitud-1">
@@ -68,6 +68,8 @@
     <p>Ingrese las coordenadas que desea Mapear: </p>
     <textarea style="height: 150px;width:500px;" id="cor"></textarea><br>
     <button onclick="mostrarGrafico()">Mostrar Grafica</button>
+    <!--<canvas id="cv" style="width: 4000px;border:1px solid black;"></canvas>-->
+    <!--<button onclick="dibujarCanva()">DibujarCanva</button>-->
     <script>
         var i=1;
         var lat=[];
@@ -413,8 +415,8 @@
                     }=position.coords;
                     /*document.getElementById('cor1-lat').value=`${latitude}`//`Your location: (${latitude},${longitude})`
                     document.getElementById('cor1-lon').value=`${longitude}`//`Your location: (${latitude},${longitude})`*/
-                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toFixed(10);
-                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toFixed(10);
+                    document.getElementById('cor1-lat').value=(parseFloat(`${latitude}`)).toFixed(14);
+                    document.getElementById('cor1-lon').value=(parseFloat(`${longitude}`)).toFixed(14);
                 }
                 function onError(){
                     document.getElementById('cor1').value="No se obtuvieron las coordenadas";
