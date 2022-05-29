@@ -133,7 +133,7 @@
             cegx=[-99.17532798981556,-99.17516504536202,-99.17542600216802,-99.17543002548388,-99.1754675764514,-99.1755138445508,-99.17547562303848,-99.17559151690027,-99.17532798981556];
             cegy=[19.453808974780536,19.45404797281946,19.454208614587117,19.45420355642922,19.454226950396784,19.454163723411376,19.454140329457825,19.453967042237146,19.453808974780536];
             var data=[{x:x,y:y},{x:cex,y:cey},{x:ceax,y:ceay},{x:cegx,y:cegy}];
-            var layout={title:"Recorrido",width:window.innerWidth,height:"600"};
+            var layout={title:"Recorrido",width:600,height:"600",yaxis: {fixedrange: true},xaxis :{fixedrange: true}};
             Plotly.newPlot("gd",data,layout);
         }
         function calcularArea(px,py){
