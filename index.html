@@ -102,10 +102,8 @@
             (-99.17461031579097,19.453320275824684)
             (-99.17521735036371,19.45287151199291)
             (-99.17602737788347,19.453431073536365)
-            */
             cex=[-99.17541532539201,-99.17512231414875,-99.17461031579097,-99.17521735036371,-99.17602737788347,-99.17541532539201];
             cey=[19.454336741401818,19.454072754761494,19.453320275824684,19.45287151199291,19.453431073536365,19.454336741401818]; 
-            /*
             1(-99.1756954746791,19.453892195944235)
             2(-99.17518183576605,19.453584552325598)
             3(-99.17523749159493,19.453505518363585)
@@ -123,7 +121,7 @@
             15(-99.17559153882097,19.453701250024466)
             16(-99.17552582476449,19.453660784619444)
             17(-99.17551576646892,19.453681649569084)
-            18(-99.1757383900352,19.453830233305336)*/
+            18(-99.1757383900352,19.453830233305336)
             ceax=[-99.1756954746791,-99.17518183576605,-99.17523749159493,-99.17534746221106,-99.17537428426803,-99.1754440217851,
             -99.17545810334578,-99.17528375970011,-99.17544670389499,-99.17595632375087,-99.17579606199205,-99.17556472109659,
             -99.1755508731297,-99.17561433763215,-99.17559153882097,-99.17552582476449,-99.17551576646892,-99.1757383900352,-99.1756954746791];
@@ -132,8 +130,10 @@
             19.45362774630948,19.453667739635584,19.453701250024466,19.453660784619444,19.453681649569084,19.453830233305336,19.453892195944235];
             cegx=[-99.17532798981556,-99.17516504536202,-99.17542600216802,-99.17543002548388,-99.1754675764514,-99.1755138445508,-99.17547562303848,-99.17559151690027,-99.17532798981556];
             cegy=[19.453808974780536,19.45404797281946,19.454208614587117,19.45420355642922,19.454226950396784,19.454163723411376,19.454140329457825,19.453967042237146,19.453808974780536];
-            var data=[{x:x,y:y},{x:cex,y:cey},{x:ceax,y:ceay},{x:cegx,y:cegy}];
-            var layout={title:"Recorrido",width:600,height:"600",yaxis: {fixedrange: true},xaxis :{fixedrange: true}};
+            var data=[{x:x,y:y},{x:cex,y:cey},{x:ceax,y:ceay},{x:cegx,y:cegy}];*/
+            var data=[{x:x,y:y}];
+            var layout={title:"Recorrido",width:600,height:"600"};
+            //var layout={title:"Recorrido",width:600,height:"600",yaxis: {fixedrange: true},xaxis :{fixedrange: true}};
             Plotly.newPlot("gd",data,layout);
         }
         function calcularArea(px,py){
@@ -324,7 +324,7 @@
                 document.getElementById("div").removeChild(button);
                 //document.getElementById("div").removeChild(copiar);
                 alert("Se logro parar Wp()");
-                alert(lat+", "+lon+", "+alt);
+                //alert(lat+", "+lon+", "+alt);
             }catch(error){
                 alert("No se logro parar el WatchPosition()"+error);
             }
@@ -332,8 +332,10 @@
         function error(){
             alert("Error al ejecutar WP()");
         }
+        corx=[];
+        cory=[];
         function showPosition(position){
-            var tabla=document.createElement("TABLE");
+            /*var tabla=document.createElement("TABLE");
             tabla.setAttribute("id","tb");
             //tabla.setAttribute("border","1");
             var piso;
@@ -352,7 +354,11 @@
             try{alt.push(position.coords.altitude.toFixed(13))}catch(error){alt.push(position.coords.altitude);}
             tabla.innerHTML=fila_col+piso;
             document.getElementById("div").appendChild(tabla);
-            i++;
+            i++;*/
+            corx.push(position.coords.longitude.toFixed(13));
+            cory.push(position.coords.latitude.toFixed(13));
+            alert(corx+", "+cory);
+            graficar(corx,cory);
         }
         function copiarCoordenadas(){
             //alert(document.querySelectorAll("#tb").length);
